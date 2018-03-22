@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:gravity="center"
+        android:background="#ffaa00"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <View
+            android:background="#aaff00"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"/>
+        <TextView
+            android:id="@+id/tv_atvt_main_arrayadapter"
+            android:gravity="center"
+            android:text="ArrayAdapter"
+            android:layout_width="match_parent"
+            android:layout_height="45dp" />
+        <View
+            android:background="#aaff00"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"/>
+        <TextView
+            android:id="@+id/tv_atvt_main_simpleadapter"
+            android:gravity="center"
+            android:text="SimpleAdapter"
+            android:layout_width="match_parent"
+            android:layout_height="45dp" />
+        <View
+            android:background="#aaff00"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"/>
+        <TextView
+            android:id="@+id/tv_atvt_main_baseadapter"
+            android:gravity="center"
+            android:text="BaseAdapter"
+            android:layout_width="match_parent"
+            android:layout_height="45dp" />
+        <View
+            android:background="#aaff00"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>
