@@ -1,16 +1,19 @@
 package com.zhisimina.listviewtest.baseadapter;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.zhisimina.listviewtest.R;
+
+import java.util.List;
 
 
 /**
@@ -34,7 +37,7 @@ public class BaseActivity extends AppCompatActivity {
 
     private void initData() {
 
-        BaseAdapter baseAdapter = new BaseAdapter() {
+        android.widget.BaseAdapter baseAdapter = new android.widget.BaseAdapter() {
             //  列表子项数量
             @Override
             public int getCount() {
@@ -72,10 +75,10 @@ public class BaseActivity extends AppCompatActivity {
         mLvBase.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING){
+                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING) {
                     ImageView image = mLvBase.findViewById(R.id.iv_lvi_simple_title);
 
-                }else {
+                } else {
 
                 }
             }
@@ -105,7 +108,7 @@ public class BaseActivity extends AppCompatActivity {
     // 优化一: 每次获取view时进行判断，convertView是否为空，是，则创建视图；否，则使用已经消失的视图(条目view)；
     //         然后设置数据。
     //   缺点：每次都需要重新获取视图中的控件。
-    BaseAdapter baseAdapter01 = new BaseAdapter() {
+    android.widget.BaseAdapter baseAdapter01 = new android.widget.BaseAdapter() {
         //  列表子项数量
         @Override
         public int getCount() {
@@ -141,9 +144,11 @@ public class BaseActivity extends AppCompatActivity {
             return convertView;
         }
     };
+
+
     // 优化二：使用静态内部类(ViewHolder)将视图中的控件保存起来，每次只需要从ViewHolder中获取就可以，
     //         不再通过findViewById方法去获取。
-    BaseAdapter baseAdapter02 = new BaseAdapter() {
+    android.widget.BaseAdapter baseAdapter02 = new android.widget.BaseAdapter() {
         //  列表子项数量
         @Override
         public int getCount() {
@@ -175,7 +180,7 @@ public class BaseActivity extends AppCompatActivity {
                 viewHolder.tvLviDesc = convertView.findViewById(R.id.tv_lvi_simple_desc);
                 // 使用setTag方法将convertView和viewHolder关联起来
                 convertView.setTag(viewHolder);
-            }else {
+            } else {
                 // 当convertView不为空时，使用getTag方法获取到已有的组件
                 viewHolder = (ViewHolder) convertView.getTag();
             }
@@ -192,6 +197,43 @@ public class BaseActivity extends AppCompatActivity {
         ImageView ivLviTitle;
         TextView tvLviName;
         TextView tvLviDesc;
+    }
+
+
+    /**
+     * BaseAdapter
+     *
+     * @param <T>
+     */
+    abstract class BaseAdapter<T> extends android.widget.BaseAdapter {
+
+        private LayoutInflater inflater;
+        private List<T> mList;
+        private Context mContext;
+
+        public BaseAdapter(Context context, List<T> list) {
+            this.mContext = context;
+            this.mList = list;
+            this.inflater = LayoutInflater.from(context);
+        }
+
+
+        @Override
+        public int getCount() {
+            return mList.size() == 0 ? 0 : mList.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return mList.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+
     }
 
 
